@@ -5,28 +5,35 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="css/login.css">
-    <title>Document</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link href="css/login.css" rel="stylesheet">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <title>Login Escola</title>
 </head>
 <body>
-    <form action="#"  th:action="@{/login}" th:object="${usuario}" method="post">
-    <div class="imgcontainer">
-        <img src="img_avatar2.png" alt="" class="avatar">
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+            <!-- Tabs Titles -->
+
+            <!-- Icon -->
+            <div class="fadeIn first">
+<!--                <img src="#" id="icon" alt="User Icon" />-->
+            </div>
+
+            <!-- Login Form -->
+            <form action="#" th:action="@{/login}" th:object="${usuario}" method="post">
+                <input type="text" id="login" class="fadeIn second" name="login" placeholder="login" th:field="*{email}">
+                <input type="text" id="password" class="fadeIn third" name="login" placeholder="password" th:field="*{password}">
+                <input type="submit" class="fadeIn fourth" value="Log In">
+            </form>
+
+            <!-- Remind Passowrd -->
+            <div id="formFooter">
+                <a class="underlineHover" href="#">Forgot Password?</a>
+            </div>
+
+        </div>
     </div>
-
-    <div class="container">
-        <label for="uname"><b>Email</b></label>
-        <input type="text" placeholder="Enter Username" id="uname" required th:field="*{email}">
-
-        <label for="psw"><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" id="psw" required th:field="*{password}">
-
-        <button type="submit">Login</button>
-        <label>
-            <input type="checkbox" checked="checked" name="remember"> Remember me
-        </label>
-    </div>
-
-</form>
 </body>
 </html>

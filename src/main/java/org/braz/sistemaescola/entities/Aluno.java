@@ -1,12 +1,10 @@
 package org.braz.sistemaescola.entities;
-import java.sql.Date;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+
+@Entity
+@DiscriminatorValue("A")
 public class Aluno extends Usuario{
 
-    public Aluno() {
-    }
-
-    public Aluno(Integer id, String nome, String email, Date data_nascimento, GeneroEnum genero, String password) {
-        super(id, nome, email, data_nascimento, genero, password);
-    }
 }

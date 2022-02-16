@@ -1,4 +1,9 @@
 package org.braz.sistemaescola.entities;
 
-public class Administrador {
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+
+@Entity
+@DiscriminatorValue("M")
+public class Administrador extends Usuario{
 }

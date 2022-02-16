@@ -1,12 +1,22 @@
 package org.braz.sistemaescola.entities;
 
-import java.sql.Date;
+import javax.persistence.*;
+import java.util.Date;
 
+@Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "usuario_tipo",
+    discriminatorType = DiscriminatorType.STRING)
 public class Usuario {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @Column(name = "id_usuario")
     private Integer id;
     private String nome;
     private String email;
+    @Temporal(TemporalType.DATE)
     private Date data_nascimento;
+    @Enumerated(EnumType.STRING)
     private GeneroEnum genero;
     private String password;
 

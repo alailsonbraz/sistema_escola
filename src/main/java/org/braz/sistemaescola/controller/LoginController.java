@@ -21,6 +21,7 @@ public class LoginController {
     @GetMapping("/")
     public String getLogin(Model model){
         model.addAttribute("usuario", new Usuario());
+        System.out.println("ENTROU NO MENU LOGIN");
         return "login";
     }
 

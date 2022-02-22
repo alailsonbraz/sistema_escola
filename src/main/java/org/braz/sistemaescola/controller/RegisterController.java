@@ -16,20 +16,20 @@ public class RegisterController {
     @Autowired
     UsuarioRepository usuarioRepository;
 
-    @GetMapping("/registerAluno.html")
+    @GetMapping("/registo/aluno")
     public String showRegisterAlunoForm(Model model){
         model.addAttribute("usuario", new Aluno());
-        return "registerAluno";
+        return "pages/registeraluno";
     }
 
-    @PostMapping("/registerAluno")
+    @PostMapping("/registo/aluno")
     public String addUser(@Validated Aluno usuario, BindingResult result, Model model){
         if(result.hasErrors()){
-            return "registerAluno";
+            return "registeraluno";
         }
 
         usuarioRepository.save(usuario);
-        return "redirect:/register";
+        return "redirect:/registo";
     }
 
     @GetMapping("/registerProfessor.html")

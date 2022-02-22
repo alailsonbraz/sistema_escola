@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class DashboardController {
 
-    @GetMapping("/dashboard.html")
+    @GetMapping("/home")
     public String home(){
-        return "dashboard";
+        return "pages/index";
     }
 
     @GetMapping("/user.html")
@@ -21,8 +21,8 @@ public class DashboardController {
         return "cursos";
     }
 
-    @GetMapping("/register.html")
+    @GetMapping("/registo")
     public String register(){
-        return "register";
+        return "pages/register";
     }
 }

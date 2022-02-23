@@ -10,7 +10,7 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                            <form  action="#" th:action="@{/registerAluno}" th:object="${usuario}" method="post">
+                            <form  action="#" th:action="@{/register/professor}" th:object="${usuario}" method="post">
                                 <div class="form-group ">
                                     <label class="control-label requiredField" for="nome">
                                         Nome
@@ -95,6 +95,22 @@
                                         </option>
                                         <option value="NOITE">
                                             Noite
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="form-group ">
+                                    <label class="control-label " for="select1">
+                                        Selecione a Disciplina
+                                    </label>
+                                    <select class="select form-control form-control" id="select2" name="select1">
+                                        <option value="PORTUGUES">
+                                            Português
+                                        </option>
+                                        <option value="MATEMATICA">
+                                            Matemática
+                                        </option>
+                                        <option value="JAVA">
+                                            JAVA
                                         </option>
                                     </select>
                                 </div>

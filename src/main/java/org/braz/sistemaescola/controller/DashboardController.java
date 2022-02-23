@@ -11,18 +11,36 @@ public class DashboardController {
         return "pages/index";
     }
 
-    @GetMapping("/user.html")
-    public String usuario(){
-        return "user";
+    @GetMapping("/userprofile")
+    public String userprofile(){
+        return "pages/usuario";
     }
 
-    @GetMapping("/cursos.html")
-    public String cursos(){
-        return "cursos";
+    @GetMapping("/professors")
+    public String professors(){
+        return "pages/professores";
     }
 
-    @GetMapping("/registo")
+    @GetMapping("/subjects")
+    public String subjects(){
+        return "pages/disciplinas";
+    }
+
+    @GetMapping("/courses")
+    public String courses(){
+        return "pages/cursos";
+    }
+
+    @GetMapping("/courseclass")
+    public String courseclass(){
+        return "pages/turmas";
+    }
+
+    @GetMapping("/register")
     public String register(){
-        return "pages/register";
+        return "pages/registo";
     }
+
 }
+
+

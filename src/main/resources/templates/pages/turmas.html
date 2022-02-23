@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="dashboard">
+
+<th:block layout:fragment="content">
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card strpied-tabled-with-hover">
+                        <div class="card-header ">
+                            <h4 class="card-title">Turmas</h4>
+                            <p class="card-category">listagem</p>
+                        </div>
+                        <div class="card-body table-full-width table-responsive">
+                            <table class="table table-hover table-striped">
+                                <thead>
+                                    <th>TURMAS</th>
+                                    <th>CURSOS</th>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>1.M</td>
+                                    <td>Tecnologia em Análise e Desenvolvimento de Sistemas</td>
+                                </tr>
+                                <tr>
+                                    <td>1.T</td>
+                                    <td>Tecnologia em Análise e Desenvolvimento de Sistemas</td>
+                                </tr>
+                                <tr>
+                                    <td>1.N</td>
+                                    <td>Tecnologia em Análise e Desenvolvimento de Sistemas</td>
+                                </tr>
+                                <tr>
+                                    <td>2.M</td>
+                                    <td>Licenciatura em Biologia</td>
+                                </tr>
+                                <tr>
+                                    <td>2.T</td>
+                                    <td>Licenciatura em Biologia</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</th:block>
+</html>

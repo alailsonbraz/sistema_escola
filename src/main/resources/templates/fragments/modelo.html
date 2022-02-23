@@ -47,38 +47,38 @@
                         <p>Visão Geral</p>
                     </a>
                 </li>
-                <li>
-                    <a class="nav-link" href="./user.html">
+                <li th:classappend="${#strings.startsWith(#httpServletRequest.requestURI, '/userprofile') ? ' nav-item active':''}">
+                    <a class="nav-link" href="userprofile">
                         <i class="nc-icon nc-circle-09"></i>
-                        <p>Alunos</p>
+                        <p>Perfil</p>
                     </a>
                 </li>
-                <li>
-                    <a class="nav-link" href="./table.html">
+                <li th:classappend="${#strings.startsWith(#httpServletRequest.requestURI, '/professors') ? ' nav-item active':''}">
+                    <a class="nav-link" href="professors">
                         <i class="nc-icon nc-notes"></i>
                         <p>Professores</p>
                     </a>
                 </li>
-                <li>
-                    <a class="nav-link" href="./table.html">
+                <li th:classappend="${#strings.startsWith(#httpServletRequest.requestURI, '/subjects') ? ' nav-item active':''}">
+                    <a class="nav-link" href="subjects">
                         <i class="nc-icon nc-notes"></i>
                         <p>Disciplinas</p>
                     </a>
                 </li>
-                <li>
-                    <a class="nav-link" href="./cursos.html">
+                <li th:classappend="${#strings.startsWith(#httpServletRequest.requestURI, '/courses') ? ' nav-item active':''}">
+                    <a class="nav-link" href="courses">
                         <i class="nc-icon nc-notes"></i>
                         <p>Cursos</p>
                     </a>
                 </li>
-                <li>
-                    <a class="nav-link" href="./table.html">
+                <li th:classappend="${#strings.startsWith(#httpServletRequest.requestURI, '/courseclass') ? ' nav-item active':''}">
+                    <a class="nav-link" href="courseclass">
                         <i class="nc-icon nc-notes"></i>
                         <p>Turmas</p>
                     </a>
                 </li>
-                <li th:classappend="${#strings.startsWith(#httpServletRequest.requestURI, '/registo') ? ' nav-item active':''}">
-                    <a class="nav-link" href="/registo">
+                <li th:classappend="${#strings.startsWith(#httpServletRequest.requestURI, '/register') ? ' nav-item active':''}">
+                    <a class="nav-link" href="register">
                         <i class="nc-icon nc-circle-09"></i>
                         <p>Registos</p>
                     </a>
@@ -92,13 +92,13 @@
             <div class="container-fluid">
                 <div class="collapse navbar-collapse justify-content-end" id="navigation">
                     <ul class="nav navbar-nav mr-auto">
-                        <li class="nav-item dropdown" th:if="${#strings.startsWith(#httpServletRequest.requestURI, '/registo')}">
+                        <li class="nav-item dropdown" th:if="${#strings.startsWith(#httpServletRequest.requestURI, '/register')}">
                             <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="no-icon">Inserir</span>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" href="/registo/aluno">Alunos</a>
-                                <a class="dropdown-item" href="/registo/professor">Professores</a>
+                                <a class="dropdown-item" href="/register/student">Alunos</a>
+                                <a class="dropdown-item" href="/register/professor">Professores</a>
                                 <a class="dropdown-item" href="#">Disciplinas</a>
                                 <a class="dropdown-item" href="#">Cursos</a>
                                 <a class="dropdown-item" href="#">Turmas</a>

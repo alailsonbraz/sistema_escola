@@ -30,7 +30,7 @@ public class RegisterController {
         }
 
         usuarioRepository.save(usuario);
-        return "redirect:/registo";
+        return "redirect:/register";
     }
 
     @GetMapping("/register/professor")
@@ -48,6 +48,7 @@ public class RegisterController {
         usuarioRepository.save(usuario);
         return "redirect:/registo";
     }
+
 
 
 }

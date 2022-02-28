@@ -10,4 +10,6 @@ public interface CursoRepository extends CrudRepository<Curso, Integer> {
 
     @Query("SELECT COUNT(c) FROM Curso c")
     long countByCurso();
+
 }
+

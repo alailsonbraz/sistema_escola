@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="dashboard">
+
+<th:block layout:fragment="content">
+    <div class="content">
+        <div class="container-fluid">
+            <div class="bootstrap-iso">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <form  action="#" th:action="@{/register/courseclass}" th:object="${turma}" method="post">
+                                <div class="form-group ">
+                                    <label class="control-label " for="selectCurso">
+                                        Selecione o Curso
+                                    </label>
+                                    <select class="select form-control" id="selectCurso" name="selectCurso">
+                                        <option value="First Choice">
+                                            First Choice
+                                        </option>
+                                        <option value="Second Choice">
+                                            Second Choice
+                                        </option>
+                                        <option value="Third Choice">
+                                            Third Choice
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="form-group ">
+                                    <label class="control-label " for="selectTurno">
+                                        Selecione a Turma
+                                    </label>
+                                    <select class="select form-control form-control" th:field="*{turno}" id="selectTurno" name="selectTurno">
+                                        <option th:value="'MANHÃ'">
+                                            Manhã
+                                        </option>
+                                        <option th:value="'TARDE'">
+                                            Tarde
+                                        </option>
+                                        <option th:value="'NOITE'">
+                                            Noite
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <div>
+                                        <button class="btn btn-primary " name="submit" type="submit" value="registerAluno">
+                                            Submit
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>
+</html>

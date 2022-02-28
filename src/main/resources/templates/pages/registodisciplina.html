@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="dashboard">
+
+<th:block layout:fragment="content">
+    <div class="content">
+        <div class="container-fluid">
+            <div class="bootstrap-iso">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <form  action="#" th:action="@{/register/subject}" th:object="${disciplina}" method="post">
+                                <div class="form-group ">
+                                    <label class="control-label requiredField" for="nome">
+                                        Nome
+                                        <span class="asteriskField">*</span>
+                                    </label>
+                                    <input class="form-control" id="nome" name="nome" placeholder="Nome completo" type="text" th:field="*{nome}"/>
+                                    <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
+                                </div>
+
+                                <div class="form-group ">
+                                    <label class="control-label " for="select1">
+                                        Selecione o Curso
+                                    </label>
+                                    <select class="select form-control" id="select1" name="select1">
+                                        <option value="First Choice">
+                                            First Choice
+                                        </option>
+                                        <option value="Second Choice">
+                                            Second Choice
+                                        </option>
+                                        <option value="Third Choice">
+                                            Third Choice
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <div>
+                                        <button class="btn btn-primary " name="submit" type="submit" value="registerAluno">
+                                            Submit
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>
+</html>

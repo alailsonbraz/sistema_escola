@@ -67,23 +67,19 @@
                                     <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
                                 </div>
                                 <div class="form-group ">
-                                    <label class="control-label " for="select1">
+                                    <label class="control-label " for="curso">
                                         Selecione o Curso
                                     </label>
-                                    <select class="select form-control" id="select1" name="select1">
-                                        <option value="First Choice">
-                                            First Choice
+                                    <select class="select form-control" id="curso" name="curso" th:field="*{cursoId}">
+                                        <option value="">
+                                            Selecione o curso
                                         </option>
-                                        <option value="Second Choice">
-                                            Second Choice
-                                        </option>
-                                        <option value="Third Choice">
-                                            Third Choice
-                                        </option>
+                                        <option th:each="curso : ${cursos}" th:value="${curso.id}"
+                                        th:text="${curso.nome}"></option>
                                     </select>
                                 </div>
                                 <div class="form-group ">
-                                    <label class="control-label " for="select1">
+                                    <label class="control-label " for="select2">
                                         Selecione a Turma
                                     </label>
                                     <select class="select form-control form-control" id="select2" name="select1">

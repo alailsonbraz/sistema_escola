@@ -1,15 +1,21 @@
 package org.braz.sistemaescola.entities;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public class Curso {
+public class Curso implements Serializable {
+    private static final long serialVersionUID = -3988513983361180058L;
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id_curso")
     private Integer id;
     private String nome;
+    @OneToMany(mappedBy = "curso")
+    private List<Turma> turmaList;
+
 
     public Curso() {
     }

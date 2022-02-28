@@ -3,13 +3,15 @@ package org.braz.sistemaescola.entities;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "usuario_tipo",
     discriminatorType = DiscriminatorType.STRING)
-public class Usuario {
+public class Usuario implements Serializable {
+    private static final long serialVersionUID = 2123431476248977308L;
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id_usuario")

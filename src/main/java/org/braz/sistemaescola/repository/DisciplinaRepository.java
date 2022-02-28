@@ -6,6 +6,8 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface DisciplinaRepository extends CrudRepository<Disciplina, Integer> {
 
+    Disciplina findById(int id);
+
     @Query("SELECT COUNT(d) FROM Disciplina d")
     long countByDisciplina();
 }

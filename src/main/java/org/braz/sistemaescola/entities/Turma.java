@@ -9,14 +9,22 @@ public class Turma {
     @Id
     @Column(name = "id_turma")
     private Integer id;
-    private String nome;
+    @Enumerated(EnumType.STRING)
+    private TurnoEnum turno;
+    @ManyToOne
+    @JoinColumn(name = "id_curso")
+    private Curso curso;
+
+    public Curso getCurso() {
+        return curso;
+    }
 
     public Turma() {
     }
 
-    public Turma(Integer id, String nome) {
+    public Turma(Integer id, TurnoEnum turno) {
         this.id = id;
-        this.nome = nome;
+        this.turno = turno;
     }
 
     public Integer getId() {
@@ -27,11 +35,11 @@ public class Turma {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public TurnoEnum getTurno() {
+        return turno;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setTurno(TurnoEnum turno) {
+        this.turno = turno;
     }
 }

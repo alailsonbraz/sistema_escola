@@ -2,13 +2,20 @@
 /* BASIC */
 
 html {
-  background-color: #56baed;
+  background-im: #56baed;
+
+
 }
 
 body {
+background-image: url("../img/educlogo.jpeg");
+  background-repeat: no-repeat, repeat;
+   background-position: center top;
+ background-size:400px;
   font-family: "Poppins", sans-serif;
   height: 100vh;
 }
+
 
 a {
   color: #92badd;
@@ -32,6 +39,7 @@ h2 {
 /* STRUCTURE */
 
 .wrapper {
+
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -42,20 +50,22 @@ h2 {
 }
 
 #formContent {
+
   -webkit-border-radius: 10px 10px 10px 10px;
   border-radius: 10px 10px 10px 10px;
   background: #fff;
   padding: 30px;
   width: 90%;
   max-width: 450px;
-  position: relative;
-  padding: 0px;
+  position: absolute;
+  padding: 10px;
   -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
   box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
   text-align: center;
 }
 
 #formFooter {
+
   background-color: #f6f6f6;
   border-top: 1px solid #dce8f1;
   padding: 25px;

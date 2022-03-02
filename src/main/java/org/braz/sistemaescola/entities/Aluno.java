@@ -11,9 +11,8 @@ public class Aluno extends Usuario{
     @ManyToOne
     @JoinColumn(name = "id_curso")
     private Curso curso;
-
+    //Mantem o atributo de forma temporária sem persistir na BD.
     @Transient
-//    Mantem o atributo de forma temporária sem persistir na BD.
     private Integer cursoId;
 
     public Aluno() {

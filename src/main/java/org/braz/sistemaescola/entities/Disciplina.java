@@ -1,6 +1,7 @@
 package org.braz.sistemaescola.entities;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -10,6 +11,9 @@ public class Disciplina {
     @Column(name = "id_disciplina")
     private Integer id;
     private String nome;
+
+    @OneToMany(mappedBy = "disciplina")
+    private List<TurmaDisciplina> turmaDisciplinaList;
 
     public Disciplina() {
     }

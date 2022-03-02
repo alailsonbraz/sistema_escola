@@ -25,6 +25,7 @@
     <!-- CSS Files -->
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="../assets/css/light-bootstrap-dashboard.css?v=2.0.0 " rel="stylesheet" />
+
 </head>
 
 <body>
@@ -37,16 +38,16 @@
         <div th:fragment="sidebar" class="sidebar-wrapper">
             <div class="logo">
                 <a href="#" class="simple-text">
-                    EDUC
+                    <img src="/assets/img/educlogo-trasnparent-light.png" alt="logo" width="150" height="150">
                 </a>
             </div>
             <ul class="nav">
-                <li th:classappend="${#strings.startsWith(#httpServletRequest.requestURI, '/home') ? ' nav-item active':''}">
-                    <a class="nav-link" href="/home">
-                        <i class="nc-icon nc-chart-pie-35"></i>
-                        <p>Visão Geral</p>
-                    </a>
-                </li>
+<!--                <li th:classappend="${#strings.startsWith(#httpServletRequest.requestURI, '/home') ? ' nav-item active':''}">-->
+<!--                    <a class="nav-link" href="/home">-->
+<!--                        <i class="nc-icon nc-chart-pie-35"></i>-->
+<!--                        <p>Visão Geral</p>-->
+<!--                    </a>-->
+<!--                </li>-->
                 <li th:classappend="${#strings.startsWith(#httpServletRequest.requestURI, '/userprofile') ? ' nav-item active':''}">
                     <a class="nav-link" href="/userprofile">
                         <i class="nc-icon nc-circle-09"></i>
@@ -103,8 +104,8 @@
                                 <a class="dropdown-item" href="/register/course">Cursos</a>
                                 <a class="dropdown-item" href="/register/courseclass">Turmas</a>
                             </div>
+                            <a class="nav-link" href="/register/assignregisters">Atribuir Registos</a>
                         </li>
-
                     </ul>
                     <ul class="navbar-nav ml-auto">
 

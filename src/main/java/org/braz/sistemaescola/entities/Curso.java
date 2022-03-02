@@ -16,7 +16,6 @@ public class Curso implements Serializable {
     @OneToMany(mappedBy = "curso")
     private List<Turma> turmaList;
 
-
     public Curso() {
     }
 
@@ -40,4 +39,5 @@ public class Curso implements Serializable {
     public void setNome(String nome) {
         this.nome = nome;
     }
+
 }

@@ -22,7 +22,7 @@ public class LoginController {
     public String getLogin(Model model){
         model.addAttribute("usuario", new Usuario());
         System.out.println("ENTROU NO MENU LOGIN");
-        return "login";
+        return "pages/login";
     }
 
     @PostMapping("/login")

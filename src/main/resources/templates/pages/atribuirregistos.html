@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="dashboard">
+
+<th:block layout:fragment="content">
+    <div class="content">
+        <div class="container-fluid">
+            <div class="bootstrap-iso">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <form  action="#" th:action="@{/register/assignregisters}" th:object="${turmaDisciplina}" method="post">
+                                <div class="form-group ">
+
+                                    <script>
+                                        function loadTurma(){
+                                            var selectCursoId = $('#curso').val();
+
+                                            $.get('/register/assignregisters/load-turma/'+selectCursoId, result => {
+                                               $('#turma').empty();
+
+                                               for(index in result){
+                                                    $('#turma').append(new Option(result[index].nomeTurma, result[index].id));
+                                               }
+                                            });
+                                        }
+                                    </script>
+
+                                    <h4>Atribuir: Turmas - Professores - Disciplinas</h4>
+                                    <label class="control-label " for="curso">
+                                        Selecione o Curso
+                                    </label>
+                                    <select class="select form-control" id="curso" name="curso" th:field="*{cursoId}" onchange="loadTurma()">
+                                        <option value="">
+                                            Selecione o curso
+                                        </option>
+                                        <option th:each="curso : ${cursos}" th:value="${curso.id}"
+                                        th:text="${curso.nome}"></option>
+                                    </select>
+
+                                    <label class="control-label " for="disciplina">
+                                        Selecione a Disciplina
+                                    </label>
+                                    <select class="select form-control" id="disciplina" name="disciplina" th:field="*{disciplina}">
+                                        <option value="">
+                                            Selecione a disciplina
+                                        </option>
+                                        <option th:each="disciplina : ${disciplinas}" th:value="${disciplina.id}"
+                                                th:text="${disciplina.nome}"></option>
+                                    </select>
+
+                                    <label class="control-label " for="turma">
+                                        Selecione a Turma
+                                    </label>
+                                    <select class="select form-control" id="turma" name="turma" th:field="*{turma}"></select>
+
+                                </div>
+                                <div class="form-group">
+                                    <div>
+                                        <button class="btn btn-primary " name="submit" type="submit" value="registerAluno">
+                                            Submit
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>
+</html>

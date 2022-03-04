@@ -13,6 +13,21 @@
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             <form  action="#" th:action="@{/register/student}" th:object="${usuario}" method="post">
                                 <div class="form-group ">
+
+                                    <script>
+                                        function loadTurma(){
+                                            var selectCursoId = $('#curso').val();
+
+                                            $.get('/register/student/load-turma/'+selectCursoId, result => {
+                                               $('#turma').empty();
+
+                                               for(index in result){
+                                                    $('#turma').append(new Option(result[index].nomeTurma, result[index].id));
+                                               }
+                                            });
+                                        }
+                                    </script>
+
                                     <h4>INSERIR ALUNO</h4>
                                     <label class="control-label requiredField" for="nome">
                                         Nome
@@ -72,13 +87,19 @@
                                     <label class="control-label " for="curso">
                                         Selecione o Curso
                                     </label>
-                                    <select class="select form-control" id="curso" name="curso" th:field="*{cursoId}">
+                                    <select class="select form-control" id="curso" name="curso" th:field="*{cursoId}" onchange="loadTurma()">
                                         <option value="">
                                             Selecione o curso
                                         </option>
                                         <option th:each="curso : ${cursos}" th:value="${curso.id}"
                                         th:text="${curso.nome}"></option>
                                     </select>
+
+                                    <label class="control-label " for="turma">
+                                        Selecione a Turma
+                                    </label>
+                                    <select class="select form-control" id="turma" name="turma" th:field="*{turma}"></select>
+
                                 </div>
                                 <div class="form-group">
                                     <div>

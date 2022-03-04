@@ -35,12 +35,28 @@ public class RegisterController {
     @Autowired
     TurmaDisciplinaRepository turmaDisciplinaRepository;
 
+    @Autowired
+    ProfessorRepository professorRepository;
+
+    @Autowired
+    TurmaAlunoRepository turmaAlunoRepository;
+
 
     @GetMapping("/register/student")
     public String showRegisterAlunoForm(Model model){
         model.addAttribute("usuario", new Aluno());
         model.addAttribute("cursos", cursoRepository.findAll());
         return "pages/registoaluno";
+    }
+
+    @ResponseBody
+    @GetMapping(value="/register/student/load-turma/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String listTurmasAluno(@PathVariable Integer id) throws JsonProcessingException {
+        List<Turma> turmalist = turmaRepository.turmalist(id);
+
+        ObjectMapper mapper = new ObjectMapper();
+
+        return mapper.writeValueAsString(turmalist);
     }
 
     @PostMapping("/register/student")
@@ -51,7 +67,22 @@ public class RegisterController {
 
         usuario.setCurso(cursoRepository.findById(usuario.getCursoId()).get());
         usuarioRepository.save(usuario);
+        //gerar todas as turmas aluno
+        gerarTurmasAluno(usuario.getTurma(), usuario);
         return "redirect:/register";
+    }
+
+    private void gerarTurmasAluno(Turma turma, Aluno aluno){
+        //Listar todas as turmas disciplinas associadas a uma turma
+       List<TurmaDisciplina> turmaDisciplinaList = turmaDisciplinaRepository.turmaDisciplinaList(turma.getId());
+
+       for (TurmaDisciplina turmaDisciplina : turmaDisciplinaList)
+       {
+           TurmaAluno turmaAluno = new TurmaAluno();
+           turmaAluno.setAluno(aluno);
+           turmaAluno.setTurmaDisciplina(turmaDisciplina);
+           turmaAlunoRepository.save(turmaAluno);
+       }
     }
 
     @GetMapping("/register/professor")
@@ -125,6 +156,7 @@ public class RegisterController {
         model.addAttribute("turmaDisciplina", new TurmaDisciplina());
         model.addAttribute("cursos", cursoRepository.findAll());
         model.addAttribute("disciplinas", disciplinaRepository.findAll());
+        model.addAttribute("professores", professorRepository.findAll());
 
         return "pages/atribuirregistos";
     }
@@ -138,6 +170,7 @@ public class RegisterController {
 
         return mapper.writeValueAsString(turmalist);
     }
+
 
     @PostMapping("/register/assignregisters")
     public String addUAssignRegisters(@Validated TurmaDisciplina turmaDisciplina, BindingResult result, Model model){

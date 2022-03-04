@@ -30,6 +30,6 @@ public class LoginController {
         Usuario user = usuarioRepository.findByEmailAndPassword(usuario.getEmail(), usuario.getPassword());
         System.out.println(user.getId());
         System.out.println(user);
-        return "redirect:/home";
+        return "redirect:/userprofile";
     }
 }

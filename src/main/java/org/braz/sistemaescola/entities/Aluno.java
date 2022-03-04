@@ -8,12 +8,17 @@ import java.util.Date;
 public class Aluno extends Usuario{
 
     private static final long serialVersionUID = -7599079571656437685L;
+
     @ManyToOne
     @JoinColumn(name = "id_curso")
     private Curso curso;
+
     //Mantem o atributo de forma temporária sem persistir na BD.
     @Transient
     private Integer cursoId;
+
+    @Transient
+    private Turma turma;
 
     public Aluno() {
     }
@@ -37,5 +42,13 @@ public class Aluno extends Usuario{
 
     public void setCursoId(Integer cursoId) {
         this.cursoId = cursoId;
+    }
+
+    public Turma getTurma() {
+        return turma;
+    }
+
+    public void setTurma(Turma turma) {
+        this.turma = turma;
     }
 }

@@ -10,19 +10,26 @@ import java.util.Date;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "usuario_tipo",
     discriminatorType = DiscriminatorType.STRING)
-public class Usuario implements Serializable {
+    public class Usuario implements Serializable {
+
     private static final long serialVersionUID = 2123431476248977308L;
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id_usuario")
     private Integer id;
+
     private String nome;
+
     private String email;
+
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
     private Date data_nascimento;
+
     @Enumerated(EnumType.STRING)
     private GeneroEnum genero;
+
     private String password;
 
     public Usuario() {

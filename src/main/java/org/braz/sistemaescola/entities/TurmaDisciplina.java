@@ -1,6 +1,7 @@
 package org.braz.sistemaescola.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -12,18 +13,22 @@ public class TurmaDisciplina {
 
     @ManyToOne
     @JoinColumn(name = "id_professor")
+    @NotNull(message = "{professor.notempty}")
     private Professor professor;
 
     @ManyToOne
     @JoinColumn(name = "id_disciplina")
+    @NotNull(message = "{disciplina.notempty}")
     private Disciplina disciplina;
 
     @ManyToOne
     @JoinColumn(name = "id_turma")
+    @NotNull(message = "{turma.notempty}")
     private Turma turma;
 
     //  Mantem o atributo de forma temporária sem persistir na BD.
     @Transient
+    @NotNull(message = "{curso.notempty}")
     private Integer cursoId;
 
     public TurmaDisciplina() {

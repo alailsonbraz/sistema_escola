@@ -28,28 +28,33 @@ public class DashboardController {
         return "pages/index";
     }
 
-    @GetMapping("/userprofile")
-    public String userprofile(){
+    @GetMapping("/")
+    public String userprofile(Model model){
+//        model.addAttribute("usuario", usuarioRepository.findById());
         return "pages/usuario";
     }
 
     @GetMapping("/professors")
-    public String professors(){
+    public String professors(Model model){
+        model.addAttribute("professores", usuarioRepository.findAll());
         return "pages/professores";
     }
 
     @GetMapping("/subjects")
-    public String subjects(){
+    public String subjects(Model model){
+        model.addAttribute("disciplinas", disciplinaRepository.findAll());
         return "pages/disciplinas";
     }
 
     @GetMapping("/courses")
-    public String courses(){
+    public String courses(Model model){
+        model.addAttribute("cursos", cursoRepository.findAll());
         return "pages/cursos";
     }
 
     @GetMapping("/courseclass")
-    public String courseclass(){
+    public String courseclass(Model model){
+        model.addAttribute("turmas", turmaRepository.findAll());
         return "pages/turmas";
     }
 

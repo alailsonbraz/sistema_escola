@@ -1,6 +1,7 @@
 package org.braz.sistemaescola.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
@@ -11,12 +12,10 @@ public class Aluno extends Usuario{
 
     @ManyToOne
     @JoinColumn(name = "id_curso")
+    @NotNull(message = "{curso.notempty}")
     private Curso curso;
 
-    //Mantem o atributo de forma temporária sem persistir na BD.
-    @Transient
-    private Integer cursoId;
-
+    @NotNull(message = "{turma.notempty}")
     @Transient
     private Turma turma;
 
@@ -36,13 +35,7 @@ public class Aluno extends Usuario{
         this.curso = curso;
     }
 
-    public Integer getCursoId() {
-        return cursoId;
-    }
-
-    public void setCursoId(Integer cursoId) {
-        this.cursoId = cursoId;
-    }
+//    pub
 
     public Turma getTurma() {
         return turma;

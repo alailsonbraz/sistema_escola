@@ -11,7 +11,7 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                            <form  action="#" th:action="@{/register/student}" th:object="${usuario}" method="post">
+                            <form  action="#" th:action="@{/register/student}" th:object="${aluno}" method="post">
                                 <div class="form-group ">
 
                                     <script>
@@ -34,15 +34,15 @@
                                         <span class="asteriskField">*</span>
                                     </label>
                                     <input class="form-control" id="nome" name="nome" placeholder="Nome completo" type="text" th:field="*{nome}"/>
-                                    <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
+                                    <span class="invalid-feedback" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
                                 </div>
                                 <div class="form-group ">
                                     <label class="control-label requiredField" for="email">
                                         Email
                                         <span class="asteriskField">*</span>
                                     </label>
-                                    <input class="form-control" id="email" name="email" placeholder="email@exemplo.com" type="text" th:field="*{email}"/>
-                                    <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+                                    <input class="form-control" id="email" name="email" placeholder="email@exemplo.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" type="email" th:field="*{email}"/>
+                                    <span class="invalid-feedback" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
                                 </div>
                                 <div class="form-group ">
                                     <label>Data de nascimento</label>
@@ -51,7 +51,7 @@
                                         <div class="input-group-addon">
                                             <span class="glyphicon glyphicon-th"></span>
                                         </div>
-                                        <span th:if="${#fields.hasErrors('data_nascimento')}" th:errors="*{data_nascimento}"></span>
+                                        <span class="invalid-feedback" th:if="${#fields.hasErrors('data_nascimento')}" th:errors="*{data_nascimento}"></span>
                                     </div>
                                 </div>
                                 <div class="form-group ">
@@ -71,7 +71,7 @@
                                                 <input name="radio" type="radio" value="FEMININO" th:field="*{genero}"/>
                                                 FEMININO
                                             </label>
-                                            <span th:if="${#fields.hasErrors('genero')}" th:errors="*{genero}"></span>
+                                            <span class="invalid-feedback" th:if="${#fields.hasErrors('genero')}" th:errors="*{genero}"></span>
                                         </div>
                                     </div>
                                 </div>
@@ -80,25 +80,36 @@
                                         Password
                                         <span class="asteriskField">*</span>
                                     </label>
-                                    <input class="form-control" id="password" name="password" type="text" th:field="*{password}"/>
-                                    <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+                                    <div class="input-group" id="show_hide_password">
+                                        <input class="form-control" id="password" name="password" type="password" th:field="*{password}"/>
+                                        <div class="input-group-addon">
+                                            <a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
+                                        </div>
+                                        <span class="invalid-feedback" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+                                    </div>
                                 </div>
                                 <div class="form-group ">
                                     <label class="control-label " for="curso">
                                         Selecione o Curso
                                     </label>
-                                    <select class="select form-control" id="curso" name="curso" th:field="*{cursoId}" onchange="loadTurma()">
+                                    <select class="select form-control" id="curso" name="curso" th:field="*{curso}" onchange="loadTurma()">
                                         <option value="">
                                             Selecione o curso
                                         </option>
                                         <option th:each="curso : ${cursos}" th:value="${curso.id}"
                                         th:text="${curso.nome}"></option>
                                     </select>
+                                    <span class="invalid-feedback" th:if="${#fields.hasErrors('curso')}" th:errors="*{curso}"></span>
 
                                     <label class="control-label " for="turma">
                                         Selecione a Turma
                                     </label>
-                                    <select class="select form-control" id="turma" name="turma" th:field="*{turma}"></select>
+                                    <select class="select form-control" id="turma" name="turma" th:field="*{turma}">
+                                        <option value="">Selecione a turma</option>
+                                        <option th:each="turma : ${turmas}" th:value="${turma.id}"
+                                                th:text="${turma.nomeTurma}"></option>
+                                    </select>
+                                    <span class="invalid-feedback" th:if="${#fields.hasErrors('turma')}" th:errors="*{turma}"></span>
 
                                 </div>
                                 <div class="form-group">

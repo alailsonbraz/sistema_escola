@@ -10,7 +10,8 @@
  The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.  -->
 <!DOCTYPE html>
 
-<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head th:fragment="head">
     <meta charset="utf-8" />
@@ -25,7 +26,25 @@
     <!-- CSS Files -->
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="../assets/css/light-bootstrap-dashboard.css?v=2.0.0 " rel="stylesheet" />
+    <script src="../assets/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>
+    <script>
+        $(document).ready(function(){
+            $("#messageTimer").delay(5000).fadeOut('slow');
 
+            $("#show_hide_password a").on('click', function(event) {
+                event.preventDefault();
+                if($('#show_hide_password input').attr("type") == "text"){
+                    $('#show_hide_password input').attr('type', 'password');
+                    $('#show_hide_password i').addClass( "fa-eye-slash" );
+                    $('#show_hide_password i').removeClass( "fa-eye" );
+                }else if($('#show_hide_password input').attr("type") == "password"){
+                    $('#show_hide_password input').attr('type', 'text');
+                    $('#show_hide_password i').removeClass( "fa-eye-slash" );
+                    $('#show_hide_password i').addClass( "fa-eye" );
+                }
+            });
+        });
+    </script>
 </head>
 
 <body>
@@ -36,6 +55,8 @@
     Tip 2: you can also add an image using data-image tag
 -->
         <div th:fragment="sidebar" class="sidebar-wrapper">
+            Logged user: <span sec:authentication="name">Bob</span>
+            Roles: <span sec:authentication="principal.authorities"></span>
             <div class="logo">
                 <a href="#" class="simple-text">
                     <img src="/assets/img/educlogo-trasnparent-light.png" alt="logo" width="150" height="150">
@@ -48,8 +69,8 @@
 <!--                        <p>Visão Geral</p>-->
 <!--                    </a>-->
 <!--                </li>-->
-                <li th:classappend="${#strings.startsWith(#httpServletRequest.requestURI, '/userprofile') ? ' nav-item active':''}">
-                    <a class="nav-link" href="/userprofile">
+                <li th:classappend="${#strings.startsWith(#httpServletRequest.requestURI, '/') ? ' nav-item active':''}">
+                    <a class="nav-link" href="/">
                         <i class="nc-icon nc-circle-09"></i>
                         <p>Perfil</p>
                     </a>
@@ -78,7 +99,7 @@
                         <p>Turmas</p>
                     </a>
                 </li>
-                <li th:classappend="${#strings.startsWith(#httpServletRequest.requestURI, '/register') ? ' nav-item active':''}">
+                <li sec:authorize="hasAuthority('M')" th:classappend="${#strings.startsWith(#httpServletRequest.requestURI, '/register') ? ' nav-item active':''}">
                     <a class="nav-link" href="/register">
                         <i class="nc-icon nc-circle-09"></i>
                         <p>Registos</p>
@@ -98,11 +119,12 @@
                                 <span class="no-icon">Inserir</span>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" href="/register/student">Alunos</a>
-                                <a class="dropdown-item" href="/register/professor">Professores</a>
                                 <a class="dropdown-item" href="/register/subject">Disciplinas</a>
                                 <a class="dropdown-item" href="/register/course">Cursos</a>
                                 <a class="dropdown-item" href="/register/courseclass">Turmas</a>
+                                <a class="dropdown-item" href="/register/professor">Professores</a>
+                                <a class="dropdown-item" href="/register/student">Alunos</a>
+
                             </div>
                             <a class="nav-link" href="/register/assignregisters">Atribuir Registos</a>
                         </li>
@@ -110,7 +132,7 @@
                     <ul class="navbar-nav ml-auto">
 
                         <li class="nav-item">
-                            <a class="nav-link" href="#pablo">
+                            <a class="nav-link" th:href="@{/logout}">
                                 <span class="no-icon">Log out</span>
                             </a>
                         </li>
@@ -138,7 +160,6 @@
 </body>
 <!--   Core JS Files   -->
 <th:block th:fragment="scripts">
-<script src="../assets/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>
 <script src="../assets/js/core/popper.min.js" type="text/javascript"></script>
 <script src="../assets/js/core/bootstrap.min.js" type="text/javascript"></script>
 <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->

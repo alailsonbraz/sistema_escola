@@ -29,6 +29,9 @@
         <!-- Navbar -->
         <nav th:replace="fragments/modelo :: navbar"></nav>
         <!-- End Navbar -->
+
+        <div id="messageTimer" th:if="${message}" th:text="${message}" th:class="${'alert ' + alertClass}"></div>
+
         <div class="content" layout:fragment="content">
 
         </div>

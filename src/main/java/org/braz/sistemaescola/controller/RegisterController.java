@@ -6,15 +6,17 @@ import org.braz.sistemaescola.entities.*;
 import org.braz.sistemaescola.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -41,10 +43,13 @@ public class RegisterController {
     @Autowired
     TurmaAlunoRepository turmaAlunoRepository;
 
+    @Autowired
+    BCryptPasswordEncoder passwordEncoder;
+
 
     @GetMapping("/register/student")
     public String showRegisterAlunoForm(Model model){
-        model.addAttribute("usuario", new Aluno());
+        model.addAttribute("aluno", new Aluno());
         model.addAttribute("cursos", cursoRepository.findAll());
         return "pages/registoaluno";
     }
@@ -60,15 +65,22 @@ public class RegisterController {
     }
 
     @PostMapping("/register/student")
-    public String addUserAluno(@Validated Aluno usuario, BindingResult result, Model model){
+    public String addUserAluno(@Valid Aluno aluno, BindingResult result, Model model, RedirectAttributes redirectAttributes){
         if(result.hasErrors()){
+            model.addAttribute("message", "Registration Failed");
+            model.addAttribute("alertClass", "alert-danger");
+            model.addAttribute("cursos", cursoRepository.findAll());
+            if(aluno.getCurso() != null) {
+                model.addAttribute("turmas", turmaRepository.turmalist(aluno.getCurso().getId()));
+            }
             return "pages/registoaluno";
         }
-
-        usuario.setCurso(cursoRepository.findById(usuario.getCursoId()).get());
-        usuarioRepository.save(usuario);
+        aluno.setPassword(passwordEncoder.encode(aluno.getPassword()));
+        usuarioRepository.save(aluno);
         //gerar todas as turmas aluno
-        gerarTurmasAluno(usuario.getTurma(), usuario);
+        gerarTurmasAluno(aluno.getTurma(), aluno);
+        redirectAttributes.addFlashAttribute("message", "Success");
+        redirectAttributes.addFlashAttribute("alertClass", "alert-success");
         return "redirect:/register";
     }
 
@@ -87,17 +99,21 @@ public class RegisterController {
 
     @GetMapping("/register/professor")
     public String showRegisterProfessorForm(Model model){
-        model.addAttribute("usuario", new Professor());
+        model.addAttribute("professor", new Professor());
         return "pages/registoprofessor";
         }
 
     @PostMapping("/register/professor")
-    public String addUserProfessor(@Validated Professor usuario, BindingResult result, Model model){
+    public String addUserProfessor(@Valid Professor professor, BindingResult result, Model model, RedirectAttributes redirectAttributes){
         if(result.hasErrors()){
+            model.addAttribute("message", "Registration Failed");
+            model.addAttribute("alertClass", "alert-danger");
             return "pages/registoprofessor";
         }
 
-        usuarioRepository.save(usuario);
+        usuarioRepository.save(professor);
+        redirectAttributes.addFlashAttribute("message", "Success");
+        redirectAttributes.addFlashAttribute("alertClass", "alert-success");
         return "redirect:/register";
     }
 
@@ -108,12 +124,16 @@ public class RegisterController {
     }
 
     @PostMapping("/register/subject")
-    public String addUSubject(@Validated Disciplina disciplina, BindingResult result, Model model){
+    public String addUSubject(@Valid Disciplina disciplina, BindingResult result, Model model, RedirectAttributes redirectAttributes){
         if(result.hasErrors()){
+            model.addAttribute("message", "Registration Failed");
+            model.addAttribute("alertClass", "alert-danger");
             return "pages/registodisciplina";
         }
 
         disciplinaRepository.save(disciplina);
+        redirectAttributes.addFlashAttribute("message", "Success");
+        redirectAttributes.addFlashAttribute("alertClass", "alert-success");
         return "redirect:/register";
     }
 
@@ -124,12 +144,16 @@ public class RegisterController {
     }
 
     @PostMapping("/register/course")
-    public String addUCourse(@Validated Curso curso, BindingResult result, Model model){
+    public String addUCourse(@Valid Curso curso, BindingResult result, Model model, RedirectAttributes redirectAttributes){
         if(result.hasErrors()){
+            model.addAttribute("message", "Registration Failed");
+            model.addAttribute("alertClass", "alert-danger");
             return "pages/registocurso";
         }
 
         cursoRepository.save(curso);
+        redirectAttributes.addFlashAttribute("message", "Success");
+        redirectAttributes.addFlashAttribute("alertClass", "alert-success");
         return "redirect:/register";
     }
 
@@ -141,13 +165,19 @@ public class RegisterController {
     }
 
     @PostMapping("/register/courseclass")
-    public String addUCourseClass(@Validated Turma turma, BindingResult result, Model model){
+    public String addUCourseClass(@Valid Turma turma, BindingResult result, Model model, RedirectAttributes redirectAttributes){
+
         if(result.hasErrors()){
+            model.addAttribute("message", "Registration Failed");
+            model.addAttribute("alertClass", "alert-danger");
+            model.addAttribute("cursos", cursoRepository.findAll());
             return "pages/registoturma";
         }
 
         turma.setCurso(cursoRepository.findById(turma.getCursoId()).get());
         turmaRepository.save(turma);
+        redirectAttributes.addFlashAttribute("message", "Success");
+        redirectAttributes.addFlashAttribute("alertClass", "alert-success");
         return "redirect:/register";
     }
 
@@ -173,12 +203,24 @@ public class RegisterController {
 
 
     @PostMapping("/register/assignregisters")
-    public String addUAssignRegisters(@Validated TurmaDisciplina turmaDisciplina, BindingResult result, Model model){
+    public String addUAssignRegisters(@Valid TurmaDisciplina turmaDisciplina, BindingResult result, Model model, RedirectAttributes redirectAttributes){
         if(result.hasErrors()){
+            model.addAttribute("message", "Registration Failed");
+            model.addAttribute("alertClass", "alert-danger");
+            model.addAttribute("cursos", cursoRepository.findAll());
+
+            if(turmaDisciplina.getCursoId() != null) {
+                model.addAttribute("turmas", turmaRepository.turmalist(turmaDisciplina.getCursoId()));
+            }
+
+            model.addAttribute("disciplinas", disciplinaRepository.findAll());
+            model.addAttribute("professores", professorRepository.findAll());
             return "pages/atribuirregistos";
         }
 
         turmaDisciplinaRepository.save(turmaDisciplina);
+        redirectAttributes.addFlashAttribute("message", "Success");
+        redirectAttributes.addFlashAttribute("alertClass", "alert-success");
         return "redirect:/register";
     }
 

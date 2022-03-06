@@ -1,6 +1,8 @@
 package org.braz.sistemaescola.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.List;
 
@@ -12,6 +14,9 @@ public class Curso implements Serializable {
     @Id
     @Column(name = "id_curso")
     private Integer id;
+
+    @NotNull
+    @NotEmpty(message = "{nome.notempty}")
     private String nome;
     @OneToMany(mappedBy = "curso")
     private List<Turma> turmaList;

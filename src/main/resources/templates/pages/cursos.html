@@ -19,21 +19,9 @@
                                     <th>DESCRIÇÃO</th>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>Tecnologia em Análise e Desenvolvimento de Sistemas</td>
-                                </tr>
-                                <tr>
-                                    <td>Licenciatura em Biologia</td>
-                                </tr>
-                                <tr>
-                                    <td>Licenciatura em História</td>
-                                </tr>
-                                <tr>
-                                    <td>Licenciatura em Engenharia de Software</td>
-                                </tr>
-                                <tr>
-                                    <td>Mestrado em Ciência de Dados</td>
-                                </tr>
+                                    <tr th:each="curso : ${cursos}">
+                                        <td th:text="${curso.nome}">DESCRIÇÃO</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>

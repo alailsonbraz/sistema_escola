@@ -3,6 +3,8 @@ package org.braz.sistemaescola.entities;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -19,17 +21,25 @@ import java.util.Date;
     @Column(name = "id_usuario")
     private Integer id;
 
+    @NotNull
+    @NotEmpty(message = "{nome.notempty}")
     private String nome;
 
+    @NotNull
+    @NotEmpty(message = "{email.notempty}")
     private String email;
 
+    @NotNull(message = "{data.notempty}")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
     private Date data_nascimento;
 
+    @NotNull(message = "{genero.notempty}")
     @Enumerated(EnumType.STRING)
     private GeneroEnum genero;
 
+    @NotNull(message = "{password.notempty}")
+    @NotEmpty(message = "{password.notempty}")
     private String password;
 
     public Usuario() {
@@ -92,4 +102,10 @@ import java.util.Date;
         this.password = password;
     }
 
+    @Transient
+    public String getDiscriminatorValue(){
+        DiscriminatorValue val = this.getClass().getAnnotation( DiscriminatorValue.class );
+
+        return val == null ? null : val.value();
+    }
 }

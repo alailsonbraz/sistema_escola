@@ -1,6 +1,8 @@
 package org.braz.sistemaescola.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
@@ -10,6 +12,9 @@ public class Disciplina {
     @Id
     @Column(name = "id_disciplina")
     private Integer id;
+
+    @NotNull
+    @NotEmpty(message = "{nome.notempty}")
     private String nome;
 
     @OneToMany(mappedBy = "disciplina")

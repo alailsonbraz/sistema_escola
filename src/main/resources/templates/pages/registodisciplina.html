@@ -18,7 +18,8 @@
                                         <span class="asteriskField">*</span>
                                     </label>
                                     <input class="form-control" id="nome" name="nome" placeholder="Ex.: História III" type="text" th:field="*{nome}"/>
-                                    <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
+                                    <span class="invalid-feedback" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
+
                                 </div>
                                 <div class="form-group">
                                     <div>

@@ -1,6 +1,7 @@
 package org.braz.sistemaescola.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
@@ -11,8 +12,10 @@ public class Turma {
     @Column(name = "id_turma")
     private Integer id;
 
+    @NotNull(message = "{turno.notempty}")
     @Enumerated(EnumType.STRING)
     private TurnoEnum turno;
+
 
     @ManyToOne
     @JoinColumn(name = "id_curso")
@@ -23,6 +26,7 @@ public class Turma {
 
     //  Mantem o atributo de forma temporária sem persistir na BD.
     @Transient
+    @NotNull(message = "{curso.notempty}")
     private Integer cursoId;
 
     public Turma() {

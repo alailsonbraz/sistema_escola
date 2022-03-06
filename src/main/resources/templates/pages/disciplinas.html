@@ -19,21 +19,9 @@
                                     <th>DESCRIÇÃO</th>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>Algoritmos</td>
-                                </tr>
-                                <tr>
-                                    <td>Histologia</td>
-                                </tr>
-                                <tr>
-                                    <td>História da Grécia Antiga</td>
-                                </tr>
-                                <tr>
-                                    <td>Desenvolvimento WEB I</td>
-                                </tr>
-                                <tr>
-                                    <td>Análise de Dados</td>
-                                </tr>
+                                    <tr th:each="disciplina : ${disciplinas}">
+                                        <td th:text="${disciplina.nome}">DESCRIÇÃO</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>

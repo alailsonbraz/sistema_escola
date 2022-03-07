@@ -1,10 +1,10 @@
 package org.braz.sistemaescola.controller;
 
-import org.braz.sistemaescola.repository.CursoRepository;
-import org.braz.sistemaescola.repository.DisciplinaRepository;
-import org.braz.sistemaescola.repository.TurmaRepository;
-import org.braz.sistemaescola.repository.UsuarioRepository;
+import org.braz.sistemaescola.entities.TurmaDisciplina;
+import org.braz.sistemaescola.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +22,12 @@ public class DashboardController {
 
     @Autowired
     TurmaRepository turmaRepository;
+
+    @Autowired
+    ProfessorRepository professorRepository;
+
+    @Autowired
+    TurmaAlunoRepository turmaAlunoRepository;
 
     @GetMapping("/home")
     public String home(){
@@ -66,6 +72,24 @@ public class DashboardController {
         model.addAttribute("count_courses", cursoRepository.countByCurso());
         model.addAttribute("count_courseclass", turmaRepository.countByTurma());
         return "pages/registo";
+    }
+
+    @GetMapping("/insertgrades")
+    public String inserirNotas(Model model){
+        model.addAttribute("turmaDisciplina", new TurmaDisciplina());
+        model.addAttribute("cursos", cursoRepository.findAll());
+        model.addAttribute("disciplinas", disciplinaRepository.findAll());
+        model.addAttribute("professores", professorRepository.findAll());
+        return "pages/inserirnotas";
+    }
+
+
+    @GetMapping("/consultgrades")
+    public String consultarNotas( Model model){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentPrincipalName = authentication.getName();
+        model.addAttribute("turmasalunos", turmaAlunoRepository.turmaAlunoList(currentPrincipalName));
+        return "pages/consultarnotas";
     }
 
 }

@@ -17,7 +17,7 @@ public class TurmaAluno {
     private Aluno aluno;
 
 
-    private double nota;
+    private Double nota;
 
 
     @ManyToOne
@@ -43,7 +43,7 @@ public class TurmaAluno {
         this.aluno = aluno;
     }
 
-    public double getNota() {
+    public Double getNota() {
         return nota;
     }
 
@@ -57,5 +57,17 @@ public class TurmaAluno {
 
     public void setTurmaDisciplina(TurmaDisciplina turmaDisciplina) {
         this.turmaDisciplina = turmaDisciplina;
+    }
+
+    public String getStatus(){
+        if(nota != null){
+            if(nota >= 10){
+                return "Aprovado";
+            }else{
+                return "Reprovado";
+            }
+        }else{
+            return "Cursando";
+        }
     }
 }

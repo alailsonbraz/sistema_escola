@@ -24,9 +24,6 @@ public class LoginController {
 
 //    @PostMapping("/login")
 //    public String loginSubmit(@ModelAttribute Usuario usuario, Model model){
-//        Usuario user = usuarioRepository.findByEmailAndPassword(usuario.getEmail(), usuario.getPassword());
-//        System.out.println(user.getId());
-//        System.out.println(user);
-//        return "redirect:/userprofile";
+//        return "pages/user";
 //    }
 }

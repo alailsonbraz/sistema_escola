@@ -14,4 +14,5 @@ public interface UsuarioRepository extends CrudRepository<Usuario, Integer> {
     @Query("SELECT COUNT(p) FROM Professor p")
     long countByProfessor();
 
+
 }

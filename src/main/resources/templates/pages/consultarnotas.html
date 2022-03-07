@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="dashboard">
+
+<th:block layout:fragment="content">
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card strpied-tabled-with-hover">
+                        <div class="card-header ">
+                            <h4 class="card-title">Notas</h4>
+                            <p class="card-category">resumo</p>
+                        </div>
+                        <div class="card-body table-full-width table-responsive">
+                            <table class="table table-hover table-striped">
+                                <thead>
+                                <th>DISCIPLINA</th>
+                                <th>NOTA</th>
+                                <th>STATUS</th>
+                                </thead>
+                                <tbody>
+                                <tr th:each="turmaaluno : ${turmasalunos}">
+                                    <td th:text="${turmaaluno.turmaDisciplina.disciplina.nome}"></td>
+                                    <td th:text="${turmaaluno.nota}"></td>
+                                    <td th:text="${turmaaluno.status}"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</th:block>
+</html>

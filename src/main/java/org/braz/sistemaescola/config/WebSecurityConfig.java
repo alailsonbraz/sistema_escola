@@ -28,7 +28,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 .authorizeRequests()
                     .antMatchers("/assets/**", "*.js").permitAll()
-                    .antMatchers("/register/**").hasAnyRole("M")
+                    .antMatchers("/register/**").hasAuthority("M")
+                    .antMatchers("/insertgrades").hasAuthority("P")
+                    .antMatchers("/consultgrades").hasAuthority("A")
                     .anyRequest().authenticated()
                 .and()
                     .formLogin()
@@ -50,4 +52,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(authenticationProvider());
     }
+
+
+
 }

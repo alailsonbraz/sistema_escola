@@ -23,6 +23,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+
     <!-- CSS Files -->
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="../assets/css/light-bootstrap-dashboard.css?v=2.0.0 " rel="stylesheet" />
@@ -55,8 +56,8 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
     Tip 2: you can also add an image using data-image tag
 -->
         <div th:fragment="sidebar" class="sidebar-wrapper">
-            Logged user: <span sec:authentication="name">Bob</span>
-            Roles: <span sec:authentication="principal.authorities"></span>
+<!--            Logged user: <span sec:authentication="name">Bob</span>-->
+<!--            Roles: <span sec:authentication="principal.authorities"></span>-->
             <div class="logo">
                 <a href="#" class="simple-text">
                     <img src="/assets/img/educlogo-trasnparent-light.png" alt="logo" width="150" height="150">
@@ -103,6 +104,18 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
                     <a class="nav-link" href="/register">
                         <i class="nc-icon nc-circle-09"></i>
                         <p>Registos</p>
+                    </a>
+                </li>
+                <li sec:authorize="hasAuthority('P')" th:classappend="${#strings.startsWith(#httpServletRequest.requestURI, '/insertgrades') ? ' nav-item active':''}">
+                    <a class="nav-link" href="/insertgrades">
+                        <i class="nc-icon nc-bullet-list-67"></i>
+                        <p>Inserir Notas</p>
+                    </a>
+                </li>
+                <li sec:authorize="hasAuthority('A')" th:classappend="${#strings.startsWith(#httpServletRequest.requestURI, '/consultgrades') ? ' nav-item active':''}">
+                    <a class="nav-link" href="/consultgrades">
+                        <i class="nc-icon nc-bullet-list-67"></i>
+                        <p>Consultar Notas</p>
                     </a>
                 </li>
             </ul>

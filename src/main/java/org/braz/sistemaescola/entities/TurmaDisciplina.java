@@ -34,6 +34,14 @@ public class TurmaDisciplina {
     public TurmaDisciplina() {
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public TurmaDisciplina(Integer id) {
         this.id = id;
     }

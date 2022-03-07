@@ -11,5 +11,6 @@ public interface TurmaDisciplinaRepository extends CrudRepository<TurmaDisciplin
     @Query("SELECT td FROM TurmaDisciplina td WHERE td.turma.id= ?1")
     List<TurmaDisciplina> turmaDisciplinaList(Integer idTurmaDisciplina);
 
-
+    @Query("SELECT T FROM TurmaDisciplina T JOIN T.professor P WHERE P.email= ?1")
+    List<TurmaDisciplina> turmaDisciplinaListByEmail(String email);
 }

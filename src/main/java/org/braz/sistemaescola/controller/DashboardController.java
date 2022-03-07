@@ -1,13 +1,19 @@
 package org.braz.sistemaescola.controller;
 
-import org.braz.sistemaescola.entities.TurmaDisciplina;
+import org.braz.sistemaescola.config.dto.TurmaAlunoDto;
 import org.braz.sistemaescola.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.validation.Valid;
 
 @Controller
 public class DashboardController {
@@ -28,6 +34,9 @@ public class DashboardController {
 
     @Autowired
     TurmaAlunoRepository turmaAlunoRepository;
+
+    @Autowired
+    TurmaDisciplinaRepository turmaDisciplinaRepository;
 
     @GetMapping("/home")
     public String home(){
@@ -74,13 +83,34 @@ public class DashboardController {
         return "pages/registo";
     }
 
-    @GetMapping("/insertgrades")
-    public String inserirNotas(Model model){
-        model.addAttribute("turmaDisciplina", new TurmaDisciplina());
-        model.addAttribute("cursos", cursoRepository.findAll());
-        model.addAttribute("disciplinas", disciplinaRepository.findAll());
-        model.addAttribute("professores", professorRepository.findAll());
+    @GetMapping("/classselection")
+    public String classSelection(Model model){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentPrincipalName = authentication.getName();
+        model.addAttribute("turmasdisciplinas", turmaDisciplinaRepository.turmaDisciplinaListByEmail(currentPrincipalName));
+        return "pages/selecaoturma";
+    }
+
+    @GetMapping("/insertgrades/{id}")
+    public String inserirNotas(@PathVariable Integer id, Model model){
+        TurmaAlunoDto turmasAlunosForm = new TurmaAlunoDto(turmaAlunoRepository.turmaAlunoListByTurma(id));
+        model.addAttribute("form", turmasAlunosForm);
         return "pages/inserirnotas";
+    }
+
+    @PostMapping("/insertgrades")
+    public String salvarNotaspublic(@Valid TurmaAlunoDto turmaAlunoDto, BindingResult result, Model model, RedirectAttributes redirectAttributes){
+        if(result.hasErrors()){
+            model.addAttribute("message", "Registration Failed");
+            model.addAttribute("alertClass", "alert-danger");
+
+            return "pages/inserirnotas";
+        }
+
+        turmaAlunoRepository.saveAll(turmaAlunoDto.getTurmas());
+        redirectAttributes.addFlashAttribute("message", "Success");
+        redirectAttributes.addFlashAttribute("alertClass", "alert-success");
+        return "redirect:/classselection";
     }
 
 

@@ -11,6 +11,9 @@ public interface TurmaAlunoRepository extends CrudRepository<TurmaAluno, Integer
     @Query("SELECT T FROM TurmaAluno T JOIN T.aluno A WHERE A.email= ?1")
     List<TurmaAluno> turmaAlunoList(String email);
 
+    @Query("SELECT Ta FROM TurmaAluno Ta JOIN Ta.turmaDisciplina Td WHERE Td.id= ?1 ORDER BY Ta.aluno.nome ASC")
+    List<TurmaAluno> turmaAlunoListByTurma(Integer id);
+
 
 
 }

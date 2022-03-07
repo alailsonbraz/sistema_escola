@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="dashboard">
+
+<th:block layout:fragment="content">
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card strpied-tabled-with-hover">
+                        <div class="card-header ">
+                            <h4 class="card-title">Turmas</h4>
+                            <p class="card-category">listagem</p>
+                        </div>
+                        <div class="card-body table-full-width table-responsive">
+                            <table class="table table-hover table-striped">
+                                <thead>
+                                    <th>TURMA</th>
+                                    <th>DISCIPLINA</th>
+                                    <th>AÇÃO</th>
+                                </thead>
+                                <tbody>
+                                <tr th:each="turmadisciplina : ${turmasdisciplinas}">
+                                    <td th:text="${turmadisciplina.turma.nomeTurma}"></td>
+                                    <td th:text="${turmadisciplina.disciplina.nome}">.</td>
+                                    <td><a th:href="@{/insertgrades/{id}(id=${turmadisciplina.id})}">Inserir Nota</a></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</th:block>
+</html>

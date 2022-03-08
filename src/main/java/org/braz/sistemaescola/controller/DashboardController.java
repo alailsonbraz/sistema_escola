@@ -1,6 +1,7 @@
 package org.braz.sistemaescola.controller;
 
 import org.braz.sistemaescola.config.dto.TurmaAlunoDto;
+import org.braz.sistemaescola.entities.Aluno;
 import org.braz.sistemaescola.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -45,7 +46,9 @@ public class DashboardController {
 
     @GetMapping("/")
     public String userprofile(Model model){
-//        model.addAttribute("usuario", usuarioRepository.findById());
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentPrincipalName = authentication.getName();
+        model.addAttribute("usuario", usuarioRepository.findByEmail(currentPrincipalName));
         return "pages/usuario";
     }
 
@@ -119,6 +122,7 @@ public class DashboardController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentPrincipalName = authentication.getName();
         model.addAttribute("turmasalunos", turmaAlunoRepository.turmaAlunoList(currentPrincipalName));
+        model.addAttribute("curso", ((Aluno)usuarioRepository.findByEmail(currentPrincipalName)).getCurso().getNome());
         return "pages/consultarnotas";
     }
 

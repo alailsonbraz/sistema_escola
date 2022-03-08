@@ -111,6 +111,7 @@ public class RegisterController {
             return "pages/registoprofessor";
         }
 
+        professor.setPassword(passwordEncoder.encode(professor.getPassword()));
         usuarioRepository.save(professor);
         redirectAttributes.addFlashAttribute("message", "Success");
         redirectAttributes.addFlashAttribute("alertClass", "alert-success");

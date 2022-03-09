@@ -1,6 +1,6 @@
 package org.braz.sistemaescola.controller;
 
-import org.braz.sistemaescola.config.dto.TurmaAlunoDto;
+import org.braz.sistemaescola.dto.TurmaAlunoDto;
 import org.braz.sistemaescola.entities.Aluno;
 import org.braz.sistemaescola.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package org.braz.sistemaescola.config.dto;
+package org.braz.sistemaescola.dto;
 
 import org.braz.sistemaescola.entities.TurmaAluno;
 
